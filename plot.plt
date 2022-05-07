@@ -9,5 +9,5 @@ set grid mxtics mytics xtics ytics
 set arrow from 48 * 1024,graph(0,0) to 48 * 1024,graph(1,1) nohead
 set arrow from 1280 * 1024,graph(0,0) to 1280 * 1024,graph(1,1) nohead
 set arrow from 18 * 1024 * 1024,graph(0,0) to 18 * 1024 * 1024,graph(1,1) nohead
-plot "log.txt" u 1:2 w l t "Volatile write i32", "log.txt" u 1:3 w l t "Non-temporal write i32"
+plot "log.txt" u 1:2 w l t "Volatile write i32", "goodresults.txt" u 1:3 w l t "Non-temporal write i32"
 
