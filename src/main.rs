@@ -10,7 +10,7 @@ fn rdtsc() -> u64 {
 }
 
 /// Maximum benchmark size, in bytes
-const MAX_BENCH_SIZE: usize = 4 * 1024 * 1024 * 1024;
+const MAX_BENCH_SIZE: usize = 32 * 1024 * 1024 * 1024;
 
 /// Approx overhead of rdtsc
 const RDTSC_SPEED: u64 = 60;
@@ -50,13 +50,18 @@ impl Benchmark {
             return None;
         }
 
+        // Find the size of this benchmark
+        // We must always at least write 16 chunks, and we must write at least
+        // 4 GiB
+        let bench_size = (4 * 1024 * 1024 * 1024).max(chunk_size);
+
         // Compute number of bytes we're actually going to write
-        let written = (MAX_BENCH_SIZE / chunk_size) * chunk_size;
+        let written = (bench_size / chunk_size) * chunk_size;
 
         // Benchmark enough times to write `TO_WRITE` bytes in `CHUNK_SIZE`
         // chunks
         self.tmp.clear();
-        for _ in 0..MAX_BENCH_SIZE / chunk_size {
+        for _ in 0..bench_size / chunk_size {
             let it = rdtsc();
 
             let mut ptr = self.storage as usize;
@@ -103,13 +108,18 @@ impl Benchmark {
             return None;
         }
 
+        // Find the size of this benchmark
+        // We must always at least write 16 chunks, and we must write at least
+        // 4 GiB
+        let bench_size = (4 * 1024 * 1024 * 1024).max(chunk_size * 16);
+
         // Compute number of bytes we're actually going to write
-        let written = (MAX_BENCH_SIZE / chunk_size) * chunk_size;
+        let written = (bench_size / chunk_size) * chunk_size;
 
         // Benchmark enough times to write `TO_WRITE` bytes in `CHUNK_SIZE`
         // chunks
         self.tmp.clear();
-        for _ in 0..MAX_BENCH_SIZE / chunk_size {
+        for _ in 0..bench_size / chunk_size {
             let it = rdtsc();
 
             let mut ptr = self.storage as usize;
