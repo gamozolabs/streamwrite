@@ -9,7 +9,7 @@ set grid mxtics mytics xtics ytics
 set arrow from 48 * 1024,graph(0,0) to 48 * 1024,graph(1,1) nohead
 set arrow from 1280 * 1024,graph(0,0) to 1280 * 1024,graph(1,1) nohead
 set arrow from 18 * 1024 * 1024,graph(0,0) to 18 * 1024 * 1024,graph(1,1) nohead
-plot "log_physcpubind_0_membind_0.txt" u 1:2 w l t "Volatile write i32 node local", "log_physcpubind_0_membind_0.txt" u 1:3 w l t "Non-temporal write i32 node local", \
-    "log_physcpubind_0_membind_1.txt" u 1:2 w l t "Volatile write i32 node remote", "log_physcpubind_0_membind_1.txt" u 1:3 w l t "Non-temporal write i32 node remote", \
-    "log_physcpubind_0_interleave_0_1.txt" u 1:2 w l t "Volatile write i32 node interleave", "log_physcpubind_0_interleave_0_1.txt" u 1:3 w l t "Non-temporal write i32 node interleave"
+plot "log_physcpubind_0_membind_0.txt" u 1:2 w l t "Volatile write i32 node local" lc 1, "log_physcpubind_0_membind_0.txt" u 1:3 w l t "Non-temporal write i32 node local" dashtype 4 lc 1, \
+    "log_physcpubind_0_membind_1.txt" u 1:2 w l t "Volatile write i32 node remote" lc 5, "log_physcpubind_0_membind_1.txt" u 1:3 w l t "Non-temporal write i32 node remote" dashtype 4 lc 5, \
+    "log_physcpubind_0_interleave_0_1.txt" u 1:2 w l t "Volatile write i32 node interleave" lc 4, "log_physcpubind_0_interleave_0_1.txt" u 1:3 w l t "Non-temporal write i32 node interleave" dashtype 4 lc 4
 
